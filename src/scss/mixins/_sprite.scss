@@ -1,0 +1,134 @@
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: $icon-home-width;
+// }
+//
+// The large array-like variables contain all information about a single icon
+// $icon-home: x y offset_x offset_y width height total_width total_height image_path;
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+// $spritesheet: width height image $spritesheet-sprites;
+$quote-icon-name: 'quote-icon';
+$quote-icon-x: 89px;
+$quote-icon-y: 63px;
+$quote-icon-offset-x: -89px;
+$quote-icon-offset-y: -63px;
+$quote-icon-width: 28px;
+$quote-icon-height: 20px;
+$quote-icon-total-width: 181px;
+$quote-icon-total-height: 121px;
+$quote-icon-image: '../images/sprite.png';
+$quote-icon: (89px, 63px, -89px, -63px, 28px, 20px, 181px, 121px, '../images/sprite.png', 'quote-icon', );
+$time-icon-name: 'time-icon';
+$time-icon-x: 122px;
+$time-icon-y: 63px;
+$time-icon-offset-x: -122px;
+$time-icon-offset-y: -63px;
+$time-icon-width: 17px;
+$time-icon-height: 17px;
+$time-icon-total-width: 181px;
+$time-icon-total-height: 121px;
+$time-icon-image: '../images/sprite.png';
+$time-icon: (122px, 63px, -122px, -63px, 17px, 17px, 181px, 121px, '../images/sprite.png', 'time-icon', );
+$visa-logo-name: 'visa-logo';
+$visa-logo-x: 89px;
+$visa-logo-y: 0px;
+$visa-logo-offset-x: -89px;
+$visa-logo-offset-y: 0px;
+$visa-logo-width: 92px;
+$visa-logo-height: 58px;
+$visa-logo-total-width: 181px;
+$visa-logo-total-height: 121px;
+$visa-logo-image: '../images/sprite.png';
+$visa-logo: (89px, 0px, -89px, 0px, 92px, 58px, 181px, 121px, '../images/sprite.png', 'visa-logo', );
+$wheel-icon-name: 'wheel-icon_';
+$wheel-icon-x: 0px;
+$wheel-icon-y: 0px;
+$wheel-icon-offset-x: 0px;
+$wheel-icon-offset-y: 0px;
+$wheel-icon-width: 84px;
+$wheel-icon-height: 85px;
+$wheel-icon-total-width: 181px;
+$wheel-icon-total-height: 121px;
+$wheel-icon-image: '../images/sprite.png';
+$wheel-icon-: (0px, 0px, 0px, 0px, 84px, 85px, 181px, 121px, '../images/sprite.png', 'wheel-icon_', );
+$windows-store-icon-name: 'windows-store-icon';
+$windows-store-icon-x: 0px;
+$windows-store-icon-y: 90px;
+$windows-store-icon-offset-x: 0px;
+$windows-store-icon-offset-y: -90px;
+$windows-store-icon-width: 33px;
+$windows-store-icon-height: 31px;
+$windows-store-icon-total-width: 181px;
+$windows-store-icon-total-height: 121px;
+$windows-store-icon-image: '../images/sprite.png';
+$windows-store-icon: (0px, 90px, 0px, -90px, 33px, 31px, 181px, 121px, '../images/sprite.png', 'windows-store-icon', );
+$spritesheet-width: 181px;
+$spritesheet-height: 121px;
+$spritesheet-image: '../images/sprite.png';
+$spritesheet-sprites: ($quote-icon, $time-icon, $visa-logo, $wheel-icon-, $windows-store-icon, );
+$spritesheet: (181px, 121px, '../images/sprite.png', $spritesheet-sprites, );
+
+// The provided mixins are intended to be used with the array-like variables
+//
+// .icon-home {
+//   @include sprite-width($icon-home);
+// }
+//
+// .icon-email {
+//   @include sprite($icon-email);
+// }
+//
+// Example usage in HTML:
+//
+// `display: block` sprite:
+// <div class="icon-home"></div>
+//
+// To change `display` (e.g. `display: inline-block;`), we suggest using a common CSS class:
+//
+// // CSS
+// .icon {
+//   display: inline-block;
+// }
+//
+// // HTML
+// <i class="icon icon-home"></i>
+@mixin sprite-width($sprite) {
+  width: nth($sprite, 5);
+}
+
+@mixin sprite-height($sprite) {
+  height: nth($sprite, 6);
+}
+
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x  $sprite-offset-y;
+}
+
+@mixin sprite-image($sprite) {
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
+}
+
+@mixin sprite($sprite) {
+  @include sprite-image($sprite);
+  @include sprite-position($sprite);
+  @include sprite-width($sprite);
+  @include sprite-height($sprite);
+}
+
+// The `sprites` mixin generates identical output to the CSS template
+//   but can be overridden inside of SCSS
+//
+// @include sprites($spritesheet-sprites);
+@mixin sprites($sprites) {
+  @each $sprite in $sprites {
+    $sprite-name: nth($sprite, 10);
+    .#{$sprite-name} {
+      @include sprite($sprite);
+    }
+  }
+}

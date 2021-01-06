@@ -1,0 +1,29 @@
+// font-family: 'Raleway', sans-serif;
+// font-family: 'Roboto Condensed', sans-serif;
+
+$main-font: 'Roboto Condensed', sans-serif;
+$title-font: 'Raleway', sans-serif;
+$font-size: 10px;
+
+// text-color
+$text-gray: #242121;
+$text-dark: #01353e;
+$text-white: #fff;
+
+// colors
+
+$green: #00b2a0;
+$gray: #f8f8f8;
+
+//common
+$html-font-size: $font-size;
+$body-font-weight: 300;
+$body-font-size: 1rem;
+$body-font-line-height: 1;
+$body-font-family: $main-font;
+
+$main-font-color: $text-gray;
+$title-font-color: $text-dark;
+
+$content-weight: 1200px;
+$content-max-weight: 1920px;
